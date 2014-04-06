@@ -1,0 +1,30 @@
+  <%= form_tag password_resets_path, :method => :post do %>
+                 <% flash.each do |key, value| %>
+                
+                <% if value.respond_to?('each') %>
+                  
+                  <div id="error_explanation">
+                    <div class="alert alert-danger">
+                <ul>
+                  <% value.each do |msg| %>
+                  <li><%= msg %></li>
+                  <% end %>
+                </ul>
+
+                    </div>
+                  </div>
+                  
+                <% else %>
+                  <div id="error_explanation">
+                    <div class="alert alert-danger"><%= value %></div>
+                  </div>
+                <% end %>
+                
+                <% end %>
+ <div class="form-group">
+    <%= label_tag :email %>
+    <%= text_field_tag :email, params[:email], class: "form-control" %>
+  </div>
+  <div class="btn-group"><%= submit_tag "Reset", class: "btn btn-lg btn-info", :onclick => "alert('Email sent with password reset instructions.')"%>
+  </div>
+<% end %>
