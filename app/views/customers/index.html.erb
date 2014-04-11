@@ -1,0 +1,43 @@
+<h1>Listing customers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Middle name</th>
+      <th>SSN</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>Zip</th>
+      <th>Drivers license image</th>
+      <th>Current image</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @customers.each do |customer| %>
+      <tr>
+        <td><%= customer.first_name %></td>
+        <td><%= customer.last_name %></td>
+        <td><%= customer.middle_name %></td>
+        <td><%= Customer.decrypt_ssn(customer.encrypted_ssn) %></td>
+        <td><%= customer.address %></td>
+        <td><%= customer.city %></td>
+        <td><%= customer.zip %></td>
+        <td><%= customer.drivers_license_image %></td>
+        <td><%= customer.current_image %></td>
+        <td><%= link_to 'Show', customer %></td>
+        <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
+        <td><%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Customer', new_customer_path %>

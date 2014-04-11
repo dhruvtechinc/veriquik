@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 	require "bcrypt"
-
+	has_many :verification_orders
+	before_save :ensure_authentication_token
 	ROLES = %w[admin user b2b]
 	before_save { self.email = email.downcase }
 	before_create :create_remember_token
@@ -39,4 +40,19 @@ class User < ActiveRecord::Base
 			self[column] = SecureRandom.urlsafe_base64
 		end while User.exists?(column => self[column])
 	end
+
+	def ensure_authentication_token
+  		if remember_token.blank?
+    		self.remember_token = User.encrypt(User.new_remember_token)
+  	end
+	end
+
+private
+
+  def generate_authentication_token
+    loop do
+      token = Devise.friendly_token
+      break token unless User.find_by(remember_token: token)
+    end
+  end
 end

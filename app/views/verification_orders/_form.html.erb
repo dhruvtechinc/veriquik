@@ -1,0 +1,25 @@
+<%= form_for(@verification_order) do |f| %>
+  <% if @verification_order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@verification_order.errors.count, "error") %> prohibited this verification_order from being saved:</h2>
+
+      <ul>
+      <% @verification_order.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :users_id %><br>
+    <%= f.number_field :users_id %>
+  </div>
+  <div class="field">
+    <%= f.label :customers_id %><br>
+    <%= f.number_field :customers_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

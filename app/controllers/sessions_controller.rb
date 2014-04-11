@@ -1,20 +1,20 @@
 class SessionsController < ApplicationController
+	#after_filter :set_csrf_header, only: [:new, :create]
+
 	def new
 	end
 
 	def create
 		user = User.where('email = ? or username = ?',params[:session][:email].downcase,params[:session][:email].downcase).first
 		if user && user.authenticate(params[:session][:password])
-			sign_in user
-			if is_admin?
-				#redirect_to :controller => 'membership', :action => 'show', :id => user.id #, :something => 'else' "/membership/show"
-			elsif is_b2b?
-				#redirect_to :controller => 'rewards', :action => 'new', :id => user.id, :ar => 'Accrue' #, :something => 'else' "/membership/show"
-			elsif is_user?
+			if is_b2b?(user.role)
+				flash[:signin_error] = 'Invalid email/password combination'
+				redirect_to root_url
 			else
+				sign_in user
+				#redirect_t	o :controller => 'verification_orders', :action => 'show_by_user_id', :id => user.id
+				redirect_to verification_orders_path
 			end
-			puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-			puts "wuhhuu"
 		else
 			flash[:signin_error] = 'Invalid email/password combination'
 			redirect_to root_url

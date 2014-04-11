@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Users:</strong>
+  <%= @verification_order.users_id %>
+</p>
+
+<p>
+  <strong>Customers:</strong>
+  <%= @verification_order.customers_id %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @verification_order.status %>
+</p>
+
+<%= link_to 'Edit', edit_verification_order_path(@verification_order) %> |
+<%= link_to 'Back', verification_orders_path %>

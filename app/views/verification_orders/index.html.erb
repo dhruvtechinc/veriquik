@@ -1,0 +1,29 @@
+<div class="container">
+	<div class="row">
+	<div class="col-md-12">
+		<h4>Orders Verification</h4>
+			<div class="table-responsive">
+				<table class="table table-bordred table-striped">
+					<thead>
+						<th>Order ID</th>
+						<th>Current Status</th>
+						<th>Verification</th>
+					</thead>
+					<tbody>
+						<% if @verification_orders.nil? %>
+						<tr> <td colspan="5" align="center"> No open orders at this time</td></tr>
+						<% else %>
+						<% @verification_orders.each do |verification_order| %>
+						<tr>
+						<td><%= verification_order.id %></td>
+						<td><%= verification_order.status %></td>
+						<td><%= link_to 'Start', customer_path(verification_order.customers_id) %> </td>
+						</tr>
+						<% end %>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

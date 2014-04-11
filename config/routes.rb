@@ -1,9 +1,16 @@
 Veriquik::Application.routes.draw do
+  resources :verification_orders
+
+  resources :customers
+
   resources :users
   resources :password_resets
   resources :sessions, only: [:new, :create, :destroy]
   root "static_pages#home"
-  # The priority is based upon order of creation: first created -> highest priority.
+  match '/signin',  to: 'sessions#new',  via: 'get', :format => :json
+  match '/signout', to: 'sessions#destroy',       via: 'delete'
+  match '/signout', to: 'sessions#destroy',       via: 'get'
+    # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"

@@ -1,0 +1,62 @@
+<div class="container">
+	<div class="row">
+	<div class="col-md-6">
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Order Detail</h3>
+  </div>
+  <div class="panel-body">
+  <dl class="dl-horizontal">
+
+
+  <dt>First name:</dt>
+  <dd><%= @customer.first_name %></dd>
+
+
+
+  <dt>Last name:</dt>
+  <dd><%= @customer.last_name %></dd>
+
+
+
+  <dt>Middle name:</dt>
+  <dd><%= @customer.middle_name %></dd>
+
+
+
+  <dt>SSN:</dt>
+  <dd><%= Customer.decrypt_ssn(@customer.encrypted_ssn) %></dd>
+
+
+
+  <dt>Address:</dt>
+  <dd><%= @customer.address %></dd>
+
+
+
+  <dt>City:</dt>
+  <dd><%= @customer.city %></dd>
+
+
+
+  <dt>Zip:</dt>
+  <dd><%= @customer.zip %></dd>
+
+
+
+  <dt>Drivers license image:</dt>
+  <dd><%= @customer.drivers_license_image %></dd>
+
+
+
+  <dt>Current image:</dt>
+  <dd><%= @customer.current_image %></dd>
+
+
+
+  </dl>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
