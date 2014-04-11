@@ -1,5 +1,5 @@
 module VerificationOrdersHelper
 	def create_status
-		return VerificationOrder::STATU[0]
+		return VerificationOrder::STATUS[0]
 	end
 end
