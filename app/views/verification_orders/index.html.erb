@@ -1,13 +1,17 @@
 <div class="container">
 	<div class="row">
 	<div class="col-md-12">
-		<h4>Orders Verification</h4>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Order Verification</h3>
+  </div>
+  <div class="panel-body">
 			<div class="table-responsive">
 				<table class="table table-bordred table-striped">
 					<thead>
 						<th>Order ID</th>
 						<th>Current Status</th>
-						<th>Verification</th>
+						<th>Start<br>Verification</th>
 					</thead>
 					<tbody>
 						<% if @verification_orders.nil? %>
@@ -17,13 +21,17 @@
 						<tr>
 						<td><%= verification_order.id %></td>
 						<td><%= verification_order.status %></td>
-						<td><%= link_to 'Start', customer_path(verification_order.customers_id) %> </td>
+						<td><p>
+						<%= link_to content_tag(:span, '', :class => 'glyphicon text-white glyphicon-pencil'), customer_path(verification_order.customers_id), :class => "btn btn-primary btn-xs" %></p></td>
+						<td> </td>
 						</tr>
 						<% end %>
 						<% end %>
 					</tbody>
 				</table>
 			</div>
+		</div>
+		</div>
 		</div>
 	</div>
 </div>
