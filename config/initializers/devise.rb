@@ -4,7 +4,7 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  # config.secret_key = '01a8420f41b6a6665c50cc814c4beff09e15b745f7abab0c65ac922e3897fdfe7d66ed09dff498ea8aee56f574aa6c20e1047da76f8782262a3fd46888f4dcde'
+  # config.secret_key = '1052c9e577cf00342a3e2a2f7d67ff843e3e39f8a15e52a37701770b02dfbea9ab94621d77020825a44f8cd7ac78ce313b100412391b465d62d0263aa1b8af6f'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -94,10 +94,10 @@ Devise.setup do |config|
   # a value less than 10 in other environments. Note that, for bcrypt (the default
   # encryptor), the cost increases exponentially with the number of stretches (e.g.
   # a value of 20 is already extremely slow: approx. 60 seconds for 1 calculation).
-  config.stretches = Rails.env.test? ? 1 : 10
+config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = 'e842d152d6a124015b9beb7fb962a6031baa915557a9b7cf11c2fd81caab5d6b00f09839788b2db72b037f14b71a5efd10bac44468acb81837263457ff82fbf1'
+  # config.pepper = '5bf3f9894633bba4305c5416006d57f202444fbfd54da043f8e9f6b448aed61214b0126208a00de0d753184be8af6a3b0c6f7056794ba3096cefcdd4fd981026'
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -254,4 +254,7 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
   config.token_authentication_key = :auth_token
+  I18n.enforce_available_locales = false
+  config.http_authenticatable_on_xhr = false
+  config.navigational_formats = ['*/*', :html, :json]
 end

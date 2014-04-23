@@ -1,15 +1,35 @@
 Veriquik::Application.routes.draw do
+  devise_for :users
   resources :verification_orders
 
   resources :customers
+  #resources :customers, defaults: {format: :json}
 
-  resources :users
-  resources :password_resets
-  resources :sessions, only: [:new, :create, :destroy]
-  root "static_pages#home"
-  match '/signin',  to: 'sessions#new',  via: 'get', :format => :json
-  match '/signout', to: 'sessions#destroy',       via: 'delete'
-  match '/signout', to: 'sessions#destroy',       via: 'get'
+  #resources :users
+  #resources :password_resets
+  #resources :sessions, only: [:new, :create, :destroy]
+  #root "static_pages#home"
+  
+  devise_scope :user do
+    #get "sign_in", to: "devise/sessions#new"
+    root :to => "devise/sessions#new"
+    get "sign_out", to: "devise/sessions#destroy"
+    get "users/sign_out", to: "devise/sessions#destroy"
+
+    namespace :api do
+      namespace :v1 do
+        devise_scope :user do
+          post 'sessions' => 'sessions#create', :as => 'login'
+          delete 'sessions' => 'sessions#destroy', :as => 'logout'
+          get "sign_out", to: "devise/sessions#destroy"
+          get "/users/sign_out", to: "devise/sessions#destroy"
+        end
+      end
+    end
+  end
+  #match '/signin',  to: 'sessions#new',  via: 'get', :format => :json
+  #match '/signout', to: 'sessions#destroy',       via: 'delete'
+  #match '/signout', to: 'sessions#destroy',       via: 'get'
     # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,5 +1,7 @@
 class CustomersController < ApplicationController
-  before_action :signed_in_user
+  before_filter :restrict_access
+  #before_filter :json_client_key_validation
+  before_action :authenticate_user!
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
 
   respond_to :html, :json
@@ -59,5 +61,13 @@ class CustomersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
       params.require(:customer).permit(:first_name, :last_name, :middle_name, :ssn, :address, :city, :zip, :drivers_license_image, :current_image)
+    end
+
+    def restrict_access
+        if params[:format] == 'json'
+        authenticate_or_request_with_http_token do |token, options|
+        ApiKey.exists?(api_key: token)
+      end
+      end
     end
 end
